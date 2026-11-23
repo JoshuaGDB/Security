@@ -2,13 +2,12 @@ pipeline {
     agent {
         docker {
             image 'projectdiscovery/nuclei:latest'
-            // The image's entrypoint is "nuclei", which breaks Jenkins' container handling.
-            // HOME=/tmp gives Nuclei a writable place for its templates.
+            
             args '--entrypoint= -e HOME=/tmp'
         }
     }
     environment {
-        TARGET = 'https://scanme.sh'   // change to your own target
+        TARGET = 'https://scanme.sh' 
     }
     options {
         timeout(time: 30, unit: 'MINUTES')
